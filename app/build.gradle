@@ -31,7 +31,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
+    implementation "com.airbnb.android:epoxy:$epoxyVersion"
     //implementation "com.google.android.material:material:$materialVersion"
+
+    annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
     //Testing libraries
     testImplementation 'junit:junit:4.12'
