@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Zenjob Herausforderung</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Weiter</string>
+    <string name="action_sign_in_short">Einloggen</string>
+    <string name="error_invalid_email">Diese E-Mail-Adresse ist ungültig</string>
+    <string name="error_invalid_password">Mindestens 6 Zeichen</string>
+    <string name="error_incorrect_password">Dieses Passwort ist falsch</string>
+    <string name="error_field_required">Dieses Feld wird benötigt</string>
+    <string name="permission_rationale">"Für die Bereitstellung von E-Mails sind Kontaktberechtigungen erforderlich Vollendungen."
+    </string>
+</resources>
