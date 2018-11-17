@@ -6,7 +6,7 @@ package challenge.de.zenjob.challenge.network
  */
 
 
-import challenge.de.zenjob.challenge.network.model.LoginResponse
+import challenge.de.zenjob.challenge.repository.model.LoginModel
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -37,7 +37,7 @@ class RetrofitApi{
             val requestBuilder = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json")
 
-            var loginRes:LoginResponse = LoginResponse("") //TODO : FIXME
+            var loginRes:LoginModel = LoginModel(roles = null) //TODO : FIXME
             if (hasToken()) {
                 requestBuilder.addHeader(
                     "Authorization",

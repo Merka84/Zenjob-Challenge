@@ -195,7 +195,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     fun showOffer(){
-        val intent = Intent(this, OfferDetailActivity::class.java)
+        //val intent = Intent(this, OfferDetailActivity::class.java)
+        val intent = Intent(this, OfferListActivity::class.java)
         startActivity(intent)
     }
 

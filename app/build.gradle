@@ -4,11 +4,17 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "challenge.zenjob.de.zenjobchallenge"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -28,12 +34,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibraryVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     //implementation "com.google.android.material:material:$materialVersion"
 
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
     annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
     //Testing libraries

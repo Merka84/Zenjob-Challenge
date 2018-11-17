@@ -11,4 +11,5 @@
     <string name="error_field_required">Dieses Feld wird benötigt</string>
     <string name="permission_rationale">"Für die Bereitstellung von E-Mails sind Kontaktberechtigungen erforderlich Vollendungen."
     </string>
+    <string name="job_sub_header"> jobs are waiting for you</string>
 </resources>

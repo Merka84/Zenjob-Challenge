@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.OfferListActivity"
+                  android:label="@string/app_name"
+        android:screenOrientation="portrait"/>
+
         <activity android:name=".activity.OfferDetailActivity"
                   android:label="@string/app_name"
         android:screenOrientation="portrait"/>
