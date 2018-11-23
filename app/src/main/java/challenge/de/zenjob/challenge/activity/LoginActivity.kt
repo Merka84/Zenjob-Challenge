@@ -3,34 +3,21 @@ package challenge.de.zenjob.challenge.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
-import android.support.v7.app.AppCompatActivity
-import android.app.LoaderManager.LoaderCallbacks
-import android.content.CursorLoader
 import android.content.Intent
-import android.content.Loader
-import android.database.Cursor
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
-import android.provider.ContactsContract
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-
-import java.util.ArrayList
 import challenge.de.zenjob.challenge.R
-
 import kotlinx.android.synthetic.main.activity_login.*
 
-/**
- * A login screen that offers login via email/password.
- */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+
+class LoginActivity : AppCompatActivity(){
+
     private var mAuthTask: UserLoginTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +32,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             false
         })
 
-        email_sign_in_button.setOnClickListener { attemptLogin() }
+        signIn.setOnClickListener { attemptLogin() }
     }
 
 
@@ -56,15 +43,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuthTask != null) {
-            return
-        }
-
-        // Reset errors.
-        emailLayout.error = null
+         emailLayout.error = null
         passwordLayout.error = null
 
-        // Store values at the time of the login attempt.
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
 
@@ -103,12 +84,10 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     }
 
     private fun isEmailValid(email: String): Boolean {
-        //TODO: Replace this with your own logic
         return email.contains("@")
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        //TODO: Replace this with your own logic
         return password.length >= 6
     }
 
@@ -150,51 +129,8 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
-    override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
-        return CursorLoader(
-            this,
-            // Retrieve data rows for the device user's 'profile' contact.
-            Uri.withAppendedPath(
-                ContactsContract.Profile.CONTENT_URI,
-                ContactsContract.Contacts.Data.CONTENT_DIRECTORY
-            ), ProfileQuery.PROJECTION,
 
-            // Select only email addresses.
-            ContactsContract.Contacts.Data.MIMETYPE + " = ?", arrayOf(
-                ContactsContract.CommonDataKinds.Email
-                    .CONTENT_ITEM_TYPE
-            ),
-
-            // Show primary email addresses first. Note that there won't be
-            // a primary email address if the user hasn't specified one.
-            ContactsContract.Contacts.Data.IS_PRIMARY + " DESC"
-        )
-    }
-
-    override fun onLoadFinished(cursorLoader: Loader<Cursor>, cursor: Cursor) {
-        val emails = ArrayList<String>()
-        cursor.moveToFirst()
-        while (!cursor.isAfterLast) {
-            emails.add(cursor.getString(ProfileQuery.ADDRESS))
-            cursor.moveToNext()
-        }
-
-    }
-
-    override fun onLoaderReset(cursorLoader: Loader<Cursor>) {
-
-    }
-
-    object ProfileQuery {
-        val PROJECTION = arrayOf(
-            ContactsContract.CommonDataKinds.Email.ADDRESS,
-            ContactsContract.CommonDataKinds.Email.IS_PRIMARY
-        )
-        val ADDRESS = 0
-        val IS_PRIMARY = 1
-    }
-
-    fun showOffer(){
+    fun showOffers(){
         //val intent = Intent(this, OfferDetailActivity::class.java)
         val intent = Intent(this, OfferListActivity::class.java)
         startActivity(intent)
@@ -208,8 +144,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
-            // TODO: attempt authentication against a network service.
-
             try {
                 // Simulate network access.
                 Thread.sleep(2000)
@@ -217,14 +151,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
                 return false
             }
 
-            return DUMMY_CREDENTIALS
-                .map { it.split(":") }
-                .firstOrNull { it[0] == mEmail }
-                ?.let {
-                    // Account exists, return true if the password matches.
-                    it[1] == mPassword
-                }
-                ?: true
+            return  true
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -232,7 +159,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             showProgress(false)
 
             if (success!!) {
-                showOffer()
+                showOffers()
                 //finish()
             } else {
                 passwordLayout.error = getString(R.string.error_incorrect_password)
@@ -246,17 +173,5 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
     }
 
-    companion object {
-
-        /**
-         * Id to identity READ_CONTACTS permission request.
-         */
-        private val REQUEST_READ_CONTACTS = 0
-
-        /**
-         * A dummy authentication store containing known user names and passwords.
-         * TODO: remove after connecting to a real authentication system.
-         */
-        private val DUMMY_CREDENTIALS = arrayOf("akram.shokri@gmail.com:test1234")
-    }
 }
+

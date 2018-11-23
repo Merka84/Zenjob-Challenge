@@ -5,6 +5,7 @@ package challenge.de.zenjob.challenge.repository
  * @author Akram Shokri
  */
 
+import android.arch.lifecycle.MutableLiveData
 import android.support.v7.app.AppCompatActivity
 import challenge.de.zenjob.challenge.R
 import challenge.de.zenjob.challenge.repository.model.LoginModel
@@ -22,8 +23,20 @@ object DataRepository {
         return loadOfferList()
     }
 
+    fun getOffer(offerId : String) : OfferModel?{
+        val offers = loadOfferList().offers
+        return offers?.find {it.offerId.equals(offerId) }
+    }
+
     fun totalJobCountSubHeader() : String {
-        return "" + loadOfferList().total + " " + activity?.getString(R.string.job_sub_header)
+        val total = loadOfferList().total
+        return if (total > 1) {
+            "" + total + " " + activity?.getString(R.string.job_sub_header)
+        } else if (total == 1) {
+             "" + total + " " + activity?.getString(R.string.job_sub_header_single)
+         } else {
+             " " + activity?.getString(R.string.job_sub_header_none)
+         }
     }
 
     private fun loadLoginResponse() : LoginModel {

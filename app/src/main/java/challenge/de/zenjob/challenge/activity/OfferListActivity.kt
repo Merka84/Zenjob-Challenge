@@ -14,9 +14,9 @@ import challenge.de.zenjob.challenge.epoxy.controller.OfferController
  */
 class OfferListActivity : AppCompatActivity() {
 
-    private val recyclerView : RecyclerView by lazy { findViewById<RecyclerView>(R.id.offerRecycleView) }
+    private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.offerRecycleView) }
 
-    private val offerController : OfferController by lazy { OfferController(this) }
+    private val offerController: OfferController by lazy { OfferController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +24,18 @@ class OfferListActivity : AppCompatActivity() {
         initRecycler()
     }
 
-    private fun initRecycler(){
+    private fun initRecycler() {
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.apply {
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
             adapter = offerController.adapter
-            addItemDecoration(DividerItemDecoration(this@OfferListActivity,
-                linearLayoutManager.orientation))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@OfferListActivity,
+                    linearLayoutManager.orientation
+                )
+            )
         }
 
         offerController.requestModelBuild()

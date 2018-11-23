@@ -8,7 +8,8 @@
     <color name="shadowColor">#40000000</color>
     <color name="orange">#ff8000</color>
     <color name="pink">#fd528b</color>
-    <color name="gray">#e1e2e5</color>
+    <color name="gray">#e0e0e0</color>
+    <color name="grayLight">#fbfbfb</color>
     <color name="darkGray">#4e515c</color>
     <color name="violetBright">#6700ff</color>
     <color name="violetDark">#0e0056</color>

@@ -99,7 +99,11 @@ data class Location(@SerializedName("locationName")
                     val supplementary: Object? = null,
 
                     @SerializedName("locationSearchString")
-                    val locationSearchString: String = "")
+                    val locationSearchString: String = ""){
+    fun address() : String {
+        return "$locationName, $street - $streetNumber, $postalCode - $city"
+    }
+}
 
 
 data class BreakTypesItem(@SerializedName("minutes")

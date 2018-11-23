@@ -37,7 +37,7 @@ class RetrofitApi{
             val requestBuilder = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json")
 
-            var loginRes:LoginModel = LoginModel(roles = null) //TODO : FIXME
+            var loginRes = LoginModel(roles = null, error = null) //TODO : FIXME
             if (hasToken()) {
                 requestBuilder.addHeader(
                     "Authorization",

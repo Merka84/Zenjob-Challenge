@@ -18,4 +18,20 @@ data class LoginModel(@SerializedName("access_token")
                       val expiresIn: Int = 3600,
 
                       @SerializedName("username")
-                      val username: String = "")
+                      val username: String = "",
+
+                      @SerializedName("error")
+                      val error: Error?)
+
+data class Error(@SerializedName("code")
+                 val code: String = "",
+                 @SerializedName("message")
+                 val message: String = "")
+
+
+
+data class LoginParam(@SerializedName("username")
+                      val user: String = "",
+
+                      @SerializedName("password")
+                      val password: String = "")

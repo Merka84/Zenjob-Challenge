@@ -3,7 +3,6 @@ package challenge.de.zenjob.challenge.epoxy.model
 import android.view.View
 import android.widget.TextView
 import challenge.de.zenjob.challenge.R
-import challenge.de.zenjob.challenge.repository.DataRepository
 import com.airbnb.epoxy.*
 import kotlinx.android.synthetic.main.activity_offer_list_header.view.*
 

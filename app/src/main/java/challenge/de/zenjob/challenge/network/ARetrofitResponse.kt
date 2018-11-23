@@ -1,5 +1,6 @@
 package challenge.de.zenjob.challenge.network
 
+import challenge.de.zenjob.challenge.repository.model.Error
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,10 +21,12 @@ import java.io.IOException
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
 
-        if (!response.isSuccessful() || response.body() == null) {
-            checkStatusCode(response.code())
-
-            onError(call, "")
+        if (!response.isSuccessful || response.body() == null) {
+            if( response.body() != null) {
+                onError(call, (response.body() as Error).message)
+            } else{
+                onError(call, checkStatusCode(response.code()))
+            }
             return
         }
 
@@ -39,25 +42,18 @@ import java.io.IOException
         return if (t is IOException) {
             "Problem in contacting server. Please check your internet connectivity and try again."
         } else {
-            "There was an error in connection"
+            "There was an error in connection. Please try again later."
         }
     }
 
-    private fun checkStatusCode(statusCode: Int) {
-        if (statusCode == 404) {
-            "" //TODO
-        } else if (statusCode == 401) {
-            "" //login required
+    private fun checkStatusCode(statusCode: Int) : String{
+        return when (statusCode) {
+            404 -> "The API address has changed."
+            401 -> "Your session has expired, please login to continue"
+            else -> "There was a problem in contacting server"
         }
 
     }
 
-//    private fun isNetworkAvailable(): Boolean {
-//        val connectivityManager = getSystemService( , Context.CONNECTIVITY_SERVICE)
-//        return if (connectivityManager is ConnectivityManager) {
-//            val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
-//            networkInfo?.isConnected ?: false
-//        } else false
-//    }
 }
 

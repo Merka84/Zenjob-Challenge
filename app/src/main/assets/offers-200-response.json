@@ -1,7 +1,7 @@
 {
   "offset": 0,
   "max": 10,
-  "total": 1,
+  "total": 3,
   "newestTimestamp": 1488440689456,
   "offers": [
     {
@@ -52,6 +52,120 @@
         "locationLongitude": 13.402839,
         "locationLatitude": 52.527457
       }
+    },
+    {
+      "id": "Lf0opj92dfgB",
+      "jobCategoryKey": "Cafe",
+      "title": "Cafe Job",
+      "description": "This is a simple job as a helper in a Cafe",
+      "instructions": "Please call before coming",
+      "companyName": "A Cafe",
+      "companyLogoUrl": "",
+      "minutesSum": "240",
+      "hourSum": null,
+      "breakTypes": [
+        {
+          "minutes": 0,
+          "description": "Pause bei < 6 Stunden Arbeitszeit"
+        }
+      ],
+      "shifts": [
+        {
+          "beginDate": "2017-08-20T20:00:00+02:00",
+          "endDate": "2017-08-20T00:07:00+02:00",
+          "breakTypes": 0
+        },
+        {
+          "beginDate": "2017-08-21T20:02:00+02:00",
+          "endDate": "2017-08-21T00:09:00+02:00",
+          "breakTypes": 0
+        }
+      ],
+      "earningTotal": "70.00 EUR",
+      "earningHourly": "12.00 EUR",
+      "pricingTables": [
+        {
+          "isSummary": true,
+          "times": null,
+          "minutes": 240,
+          "name": "Tom",
+          "unpaid": false,
+          "earningHourly": "12.00 EUR",
+          "earningTotal": "70.00 EUR"
+        }
+      ],
+      "location": {
+        "locationName": "Cafe Restaurant",
+        "street": "Rosenthaler Straße",
+        "streetNumber": "5",
+        "supplementary": null,
+        "postalCode": "21001",
+        "city": "Stuttgart",
+        "district": "Somewhere",
+        "locationSearchString": "Rosenthaler Straße 13, 10119 Berlin",
+        "locationLongitude": 13.502839,
+        "locationLatitude": 52.427457
+      }
+    },
+    {
+      "id": "km1plm11Bhjf",
+      "jobCategoryKey": "Grocery",
+      "title": "Cafe Job",
+      "description": "It is a desk job at counter",
+      "instructions": "Please bring no belonging to work",
+      "companyName": "A Grocery Shop",
+      "companyLogoUrl": "",
+      "minutesSum": "240",
+      "hourSum": null,
+      "breakTypes": [
+        {
+          "minutes": 0,
+          "description": "Pause bei < 6 Stunden Arbeitszeit"
+        }
+      ],
+      "shifts": [
+        {
+          "beginDate": "2017-09-05T20:00:00+02:00",
+          "endDate": "2017-09-05T00:07:00+02:00",
+          "breakTypes": 0
+        },
+        {
+          "beginDate": "2017-09-07T17:00:00+02:00",
+          "endDate": "2017-09-07T22:30:00+02:00",
+          "breakTypes": 0
+        },
+        {
+          "beginDate": "2017-09-10T15:30:00+02:00",
+          "endDate": "2017-09-10T23:30:00+02:00",
+          "breakTypes": 0
+        }
+      ],
+      "earningTotal": "85.00 EUR",
+      "earningHourly": "15.00 EUR",
+      "pricingTables": [
+        {
+          "isSummary": true,
+          "times": null,
+          "minutes": 240,
+          "name": "Tom",
+          "unpaid": false,
+          "earningHourly": "15.00 EUR",
+          "earningTotal": "80.00 EUR"
+        }
+      ],
+      "location": {
+        "locationName": "Grocery Shop",
+        "street": "Random Straße",
+        "streetNumber": "6",
+        "supplementary": null,
+        "postalCode": "11002",
+        "city": "Frankfort",
+        "district": "Some area",
+        "locationSearchString": "Rosenthaler Straße 13, 10119 Berlin",
+        "locationLongitude": 13.602839,
+        "locationLatitude": 52.627457
+      }
     }
+
   ]
 }

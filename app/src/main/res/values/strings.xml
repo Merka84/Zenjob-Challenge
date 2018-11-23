@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">zenjobChallenge</string>
+    <string name="app_name">Zenjob Challenge</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -9,8 +9,8 @@
     <string name="error_invalid_password">Password should be at least 6 characters</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="job_sub_header"> jobs are waiting for you</string>
+    <string name="job_sub_header_single"> job is waiting for you</string>
+    <string name="job_sub_header_none"> No job is available at the moment</string>
+    <string name="per_hour">per hour</string>
 </resources>
