@@ -3,8 +3,9 @@ package challenge.de.zenjob.challenge.activity
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -12,18 +13,41 @@ import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import challenge.de.zenjob.challenge.R
+import challenge.de.zenjob.challenge.TokenManager
+import challenge.de.zenjob.challenge.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 
-class LoginActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity() {
 
-    private var mAuthTask: UserLoginTask? = null
+    private var loginVM: LoginViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        setUpObserver()
+        setUpListeners()
 
+    }
+
+    private fun setUpObserver() {
+        loginVM = ViewModelProviders.of(this).get(LoginViewModel::class.java)
+        loginVM?.loginData?.observe(this, Observer { dataWrapper ->
+            showProgress(false)
+            if (dataWrapper?.data != null) {
+            //TODO: need to save token in AccountManager and handle its
+            //TODO: validation with it but for simplicity I used the rather unsafe below approach
+                TokenManager.saveToken(dataWrapper?.data!!.accessToken , dataWrapper?.data!!.tokenType)
+                showOffers()
+            } else {
+                Toast.makeText(this, dataWrapper?.errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun setUpListeners() {
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 attemptLogin()
@@ -36,14 +60,8 @@ class LoginActivity : AppCompatActivity(){
     }
 
 
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private fun attemptLogin() {
-         emailLayout.error = null
+        emailLayout.error = null
         passwordLayout.error = null
 
         val emailStr = email.text.toString()
@@ -52,7 +70,6 @@ class LoginActivity : AppCompatActivity(){
         var cancel = false
         var focusView: View? = null
 
-        // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
             passwordLayout.error = getString(R.string.error_invalid_password)
             focusView = password
@@ -71,15 +88,13 @@ class LoginActivity : AppCompatActivity(){
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView?.requestFocus()
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
+//            mAuthTask = UserLoginTask(emailStr, passwordStr)
+//            mAuthTask!!.execute(null as Void?)
+            loginVM?.attemptLogin(emailStr, passwordStr)
+
         }
     }
 
@@ -130,48 +145,12 @@ class LoginActivity : AppCompatActivity(){
     }
 
 
-    fun showOffers(){
+    fun showOffers() {
         //val intent = Intent(this, OfferDetailActivity::class.java)
         val intent = Intent(this, OfferListActivity::class.java)
         startActivity(intent)
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
-        AsyncTask<Void, Void, Boolean>() {
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            try {
-                // Simulate network access.
-                Thread.sleep(2000)
-            } catch (e: InterruptedException) {
-                return false
-            }
-
-            return  true
-        }
-
-        override fun onPostExecute(success: Boolean?) {
-            mAuthTask = null
-            showProgress(false)
-
-            if (success!!) {
-                showOffers()
-                //finish()
-            } else {
-                passwordLayout.error = getString(R.string.error_incorrect_password)
-                password.requestFocus()
-            }
-        }
-
-        override fun onCancelled() {
-            mAuthTask = null
-            showProgress(false)
-        }
-    }
 
 }
 

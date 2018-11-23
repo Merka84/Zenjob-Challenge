@@ -42,6 +42,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
     //implementation "com.google.android.material:material:$materialVersion"
 
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
