@@ -3,12 +3,12 @@ package challenge.de.zenjob.challenge.epoxy.controller
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import challenge.de.zenjob.challenge.MainApplication
 import challenge.de.zenjob.challenge.R
 import challenge.de.zenjob.challenge.activity.OfferDetailActivity
 import challenge.de.zenjob.challenge.epoxy.model.HeaderModel_
-import challenge.de.zenjob.challenge.epoxy.model.OfferEpoxyModel
 import challenge.de.zenjob.challenge.epoxy.model.OfferEpoxyModel_
-import challenge.de.zenjob.challenge.repository.DataRepository
+import challenge.de.zenjob.challenge.repository.model.OffersModel
 import com.airbnb.epoxy.EpoxyController
 
 /**
@@ -18,21 +18,17 @@ import com.airbnb.epoxy.EpoxyController
 
 class OfferController(var activity: AppCompatActivity) : EpoxyController() {
 
-    var offerList: List<OfferEpoxyModel>? = null
-
-    init {
-        DataRepository.activity = activity
-    }
+    var offerList: OffersModel? = null
 
     override fun buildModels() {
         var i: Long = 0
 
         HeaderModel_()
             .id("header")
-            .headerAllJobTitle(DataRepository.totalJobCountSubHeader())
+            .headerAllJobTitle(totalJobCountSubHeader(offerList?.total))
             .addTo(this)
 
-        DataRepository.getOffers().offers?.forEach { offer ->
+        offerList?.offers?.forEach { offer ->
             OfferEpoxyModel_()
                 .id(i++)
                 .offerId(offer.offerId)
@@ -53,6 +49,15 @@ class OfferController(var activity: AppCompatActivity) : EpoxyController() {
         val intent = Intent (activity, OfferDetailActivity::class.java)
         intent.putExtra(OfferDetailActivity.OFFER_ID_KEY , offerId)
         return View.OnClickListener { activity.startActivity(intent) }
+    }
+
+    private fun totalJobCountSubHeader(totalCount : Int?) : String {
+        val total = totalCount ?: 0
+        return when {
+            total > 1 -> "$total ${MainApplication.applicationContext().getString(R.string.job_sub_header)}"
+            total == 1 -> "$total ${MainApplication.applicationContext().getString(R.string.job_sub_header_single)}"
+            else -> MainApplication.applicationContext().getString(R.string.job_sub_header_none)
+        }
     }
 
 }
