@@ -9,8 +9,8 @@
     <string name="error_invalid_password">Mindestens 6 Zeichen</string>
     <string name="error_incorrect_password">Dieses Passwort ist falsch</string>
     <string name="error_field_required">Dieses Feld wird benötigt</string>
-    <string name="job_sub_header"> jobs are waiting for you</string>
-    <string name="job_sub_header_single"> job is waiting for you</string>
-    <string name="job_sub_header_none"> No job is available at the moment</string>
+    <string name="job_sub_header"> Jobs warten auf Sie</string>
+    <string name="job_sub_header_single"> Job wartet auf Sie</string>
+    <string name="job_sub_header_none"> Jobs werden geladen, bitte warten ...</string>
     <string name="per_hour">pro Stunde</string>
 </resources>

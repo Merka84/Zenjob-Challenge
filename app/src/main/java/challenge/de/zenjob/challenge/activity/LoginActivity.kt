@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                 TokenManager.saveToken(dataWrapper?.data!!.accessToken , dataWrapper?.data!!.tokenType)
                 showOffers()
             } else {
-                Toast.makeText(this, dataWrapper?.errorMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, dataWrapper?.errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }

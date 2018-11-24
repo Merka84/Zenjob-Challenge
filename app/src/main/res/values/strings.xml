@@ -11,6 +11,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="job_sub_header"> jobs are waiting for you</string>
     <string name="job_sub_header_single"> job is waiting for you</string>
-    <string name="job_sub_header_none"> No job is available at the moment</string>
+    <string name="job_sub_header_none"> Loading jobs, please wait ...</string>
     <string name="per_hour">per hour</string>
 </resources>

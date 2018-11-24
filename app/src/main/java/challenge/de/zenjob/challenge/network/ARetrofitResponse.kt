@@ -1,6 +1,9 @@
 package challenge.de.zenjob.challenge.network
 
 import challenge.de.zenjob.challenge.repository.model.Error
+import challenge.de.zenjob.challenge.repository.model.LoginModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,13 +20,17 @@ import java.io.IOException
 
     abstract fun onFailure(call: Call<T>, t: Throwable, extra: String)
 
-    abstract fun onError(call: Call<T>, errorMsg: String)
+    abstract fun onError(call: Call<T>, errorMsg: String?)
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
 
         if (!response.isSuccessful || response.body() == null) {
-            if( response.body() != null) {
-                onError(call, (response.body() as Error).message)
+            if( response.errorBody() != null) {
+                val gson = Gson()
+                val type = object : TypeToken<LoginModel>() {}.type
+                var errorResponse: LoginModel = gson.fromJson(response.errorBody()!!.charStream(), type)
+
+                onError(call,  errorResponse.error?.message)
             } else{
                 onError(call, checkStatusCode(response.code()))
             }

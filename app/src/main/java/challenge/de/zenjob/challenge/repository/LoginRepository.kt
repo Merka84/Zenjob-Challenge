@@ -22,7 +22,7 @@ object LoginRepository {
     fun authenticate (username: String, password: String): MutableLiveData<DataWraper<LoginModel>>{
 
         RetrofitApi()
-            .create(RestApi::class.java)
+            .create(RestApi::class.java, false)
             .login(LoginParam(username , password))
             .enqueue(object : ARetrofitResponseHandler<LoginModel>(), Callback<LoginModel> {
                 override fun onSuccess(call: Call<LoginModel>, response: Response<LoginModel>) {

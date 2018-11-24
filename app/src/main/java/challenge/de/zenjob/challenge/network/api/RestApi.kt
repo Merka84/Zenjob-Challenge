@@ -26,6 +26,6 @@ interface RestApi{
    @GET("/api/employee/v1/offers")
    fun fetchOffers(@Query("offset") offset : String) : Call<OffersModel>
 
-   @GET("endpoint: /api/employee/v1/offers/{id}")
+   @GET("/api/employee/v1/offers/{id}")
    fun fetchOfferById(@Path("id") id : String) : Call<OfferModel>
 }

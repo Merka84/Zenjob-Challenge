@@ -24,13 +24,19 @@ class RetrofitApi{
     private var retrofit: Retrofit? = null
 
     fun <T> create(clazz: Class<T>): T {
-        initOkHttp()
+        initOkHttp(true)
+        initRetrofit()
+        return retrofit!!.create(clazz)
+    }
+
+    fun <T> create(clazz: Class<T>, withAuth : Boolean): T {
+        initOkHttp(withAuth)
         initRetrofit()
         return retrofit!!.create(clazz)
     }
 
 
-    private fun initOkHttp() {
+    private fun initOkHttp(withAuth : Boolean) {
         okHttpBuilder = OkHttpClient().newBuilder()
         okHttpBuilder!!.readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
         okHttpBuilder!!.connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
@@ -38,7 +44,7 @@ class RetrofitApi{
             val requestBuilder = chain.request().newBuilder()
                 .addHeader("Content-Type", "application/json")
 
-            if (TokenManager.token() != null) {
+            if (withAuth && TokenManager.token() != null) {
                 requestBuilder.addHeader(
                     "Authorization",
                     TokenManager.tokenType()
