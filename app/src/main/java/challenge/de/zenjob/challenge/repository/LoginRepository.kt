@@ -29,7 +29,7 @@ object LoginRepository {
                     loginResponse.postValue(DataWraper(response.body(), ""))
                 }
 
-                override fun onError(call: Call<LoginModel>, errorMsg: String) {
+                override fun onError(call: Call<LoginModel>, errorMsg: String?) {
                     loginResponse.postValue(DataWraper(null, errorMsg))
                 }
 

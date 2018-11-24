@@ -28,7 +28,7 @@ object OfferListRepository {
                     offerListResponse.postValue(DataWraper(response.body(), ""))
                 }
 
-                override fun onError(call: Call<OffersModel>, errorMsg: String) {
+                override fun onError(call: Call<OffersModel>, errorMsg: String?) {
                     offerListResponse.postValue(DataWraper(null, errorMsg))
                 }
 

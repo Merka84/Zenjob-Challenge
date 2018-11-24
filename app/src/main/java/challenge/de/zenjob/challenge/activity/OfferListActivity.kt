@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import challenge.de.zenjob.challenge.R
 import challenge.de.zenjob.challenge.epoxy.controller.OfferController
+import challenge.de.zenjob.challenge.repository.model.OffersModel
 import challenge.de.zenjob.challenge.viewmodel.OfferListViewModel
 
 /**
@@ -18,6 +19,7 @@ import challenge.de.zenjob.challenge.viewmodel.OfferListViewModel
  */
 class OfferListActivity : AppCompatActivity() {
     private var offerListVM: OfferListViewModel? = null
+    private var offset = 0
 
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.offerRecycleView) }
 
@@ -32,16 +34,34 @@ class OfferListActivity : AppCompatActivity() {
 
     private fun setUpObserver() {
         offerListVM = ViewModelProviders.of(this).get(OfferListViewModel::class.java)
-        offerListVM?.getOffers("0")
+        offerListVM?.getOffers("$offset")
         offerListVM?.offersData?.observe(this, Observer { dataWrapper ->
             if (dataWrapper?.data != null) {
-                offerController.offerList = dataWrapper?.data
+                if(offset == 0) {
+                    offerController.offerList = dataWrapper?.data
+                } else if(dataWrapper.data.offers != null){
+                    offerController.offerList?.offers?.addAll(dataWrapper.data.offers!!.toList())
+                    offerController.offerList?.total = dataWrapper.data.total
+                    offerController.offerList?.offset = dataWrapper.data.offset
+                    offerController.offerList?.max = dataWrapper.data.max
+                }
                 offerController.requestModelBuild()
+                loadMore(dataWrapper?.data)
             } else {
                 Toast.makeText(this, dataWrapper?.errorMessage, Toast.LENGTH_LONG).show()
             }
         })
     }
+
+    private fun loadMore(data: OffersModel) {
+        if(offset < data.total) {
+            offset += data.max
+        }
+        if (offset < data.total) {
+            offerListVM?.getOffers("$offset")
+        }
+    }
+
 
     private fun initRecycler() {
         val linearLayoutManager = LinearLayoutManager(this)

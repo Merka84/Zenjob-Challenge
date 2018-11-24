@@ -46,10 +46,8 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
     implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
-    //implementation "com.google.android.material:material:$materialVersion"
 
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
-    //kapt "com.android.databinding:compiler:$dataBindingVersion"
     annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
     //Testing libraries

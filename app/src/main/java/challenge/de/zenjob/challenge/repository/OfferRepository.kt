@@ -29,7 +29,7 @@ object OfferRepository {
                     offerResponse.postValue(response.body())
                 }
 
-                override fun onError(call: Call<OfferModel>, errorMsg: String) {
+                override fun onError(call: Call<OfferModel>, errorMsg: String?) {
                     //offerResponse.postValue()
                     Log.d("", errorMsg)
                 }
