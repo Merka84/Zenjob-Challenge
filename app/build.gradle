@@ -43,9 +43,9 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    implementation "android.arch.lifecycle:livedata:$lifecycleVersion"
-    implementation "android.arch.lifecycle:viewmodel:$lifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$arcVersion"
+    implementation "android.arch.lifecycle:livedata:$arcVersion"
+    implementation "android.arch.lifecycle:viewmodel:$arcVersion"
 
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
     annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
@@ -53,5 +53,7 @@ dependencies {
     //Testing libraries
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation "android.arch.core:core-testing:$arcVersion"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

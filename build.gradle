@@ -10,7 +10,7 @@ buildscript {
         epoxyVersion = '2.19.0'
         dataBindingVersion = '3.2.1'
         kotlinVersion = '1.2.71'
-        lifecycleVersion = '1.1.0'
+        arcVersion = '1.1.0'
     }
     
     repositories {

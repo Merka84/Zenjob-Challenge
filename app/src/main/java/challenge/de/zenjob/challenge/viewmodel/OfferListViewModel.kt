@@ -20,33 +20,3 @@ class OfferListViewModel : ViewModel() {
         OfferListRepository.fetchOffers(offset)
     }
 }
-
-
-
-//class ActivityViewModel(app: Application) : AndroidViewModel(app) {
-//    val db by lazy {
-//        Room.inMemoryDatabaseBuilder(app, PagingDatabase::class.java).build()
-//    }
-//    val pagedList: LiveData<PagedList<DataWraper<OffersModel>>> by lazy {
-//        LivePagedListBuilder<Int, DataWraper<OffersModel>>(
-//            db.userDao().dataSource, 100
-//        ).build()
-//    }
-//
-//    init {
-//        bg {
-//            (1..3000).map {
-//                User(it)
-//            }.let {
-//                it.groupBy {
-//                    it.uid / 200
-//                }.forEach { group ->
-//                    launch(CommonPool) {
-//                        delay(group.key.toLong(), TimeUnit.SECONDS)
-//                        db.userDao().insertAll(group.value)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}

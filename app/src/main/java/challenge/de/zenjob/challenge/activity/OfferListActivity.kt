@@ -36,11 +36,20 @@ class OfferListActivity : AppCompatActivity() {
         offerListVM = ViewModelProviders.of(this).get(OfferListViewModel::class.java)
         offerListVM?.getOffers("$offset")
         offerListVM?.offersData?.observe(this, Observer { dataWrapper ->
+
             if (dataWrapper?.data != null) {
-                if(offset == 0) {
+                if (offset == 0) {
                     offerController.offerList = dataWrapper?.data
-                } else if(dataWrapper.data.offers != null){
-                    offerController.offerList?.offers?.addAll(dataWrapper.data.offers!!.toList())
+
+                } else if (dataWrapper.data.offers != null) { //adding more loaded offers
+
+                    dataWrapper.data.offers.forEach {
+                        val exist = offerController.offerList?.offers?.contains(it) ?: false
+                        if (!exist) {
+                            offerController.offerList?.offers?.add(it)
+                        }
+                    }
+
                     offerController.offerList?.total = dataWrapper.data.total
                     offerController.offerList?.offset = dataWrapper.data.offset
                     offerController.offerList?.max = dataWrapper.data.max
@@ -54,7 +63,7 @@ class OfferListActivity : AppCompatActivity() {
     }
 
     private fun loadMore(data: OffersModel) {
-        if(offset < data.total) {
+        if (offset < data.total) {
             offset += data.max
         }
         if (offset < data.total) {
